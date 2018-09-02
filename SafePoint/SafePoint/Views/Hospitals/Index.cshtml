@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SafePoint.Models.Hospital>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div id="map" style="height:300px"></div>
+<p>
+    @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HospName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HospType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="coordinates">
+            <td class="description">
+                @Html.DisplayFor(modelItem => item.HospName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HospType)
+            </td>
+            <td class="latitude">
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td class="longitude">
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.HospId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.HospId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.HospId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/mapbox")
+}

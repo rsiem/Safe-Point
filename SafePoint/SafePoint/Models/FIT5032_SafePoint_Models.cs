@@ -13,7 +13,6 @@ namespace SafePoint.Models
         }
 
         public virtual DbSet<Hospital> Hospitals { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -64,46 +63,6 @@ namespace SafePoint.Models
             modelBuilder.Entity<Hospital>()
                 .Property(e => e.Longitude)
                 .HasPrecision(11, 8);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.HospName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.HospType)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.LGA)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.ServiceName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.StreetNumber)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.RoadName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.RoadType)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.RoadSuffix)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.PostalCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.State)
-                .IsUnicode(false);
         }
     }
 }

@@ -10,17 +10,17 @@ using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
-    public class HospitalController : Controller
+    public class HospitalsController : Controller
     {
         private FIT5032_SafePoint_Models db = new FIT5032_SafePoint_Models();
 
-        // GET: Hospital
+        // GET: Hospitals
         public ActionResult Index()
         {
             return View(db.Hospitals.ToList());
         }
 
-        // GET: Hospital/Details/5
+        // GET: Hospitals/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace SafePoint.Controllers
             return View(hospital);
         }
 
-        // GET: Hospital/Create
+        // GET: Hospitals/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Hospital/Create
+        // POST: Hospitals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +58,7 @@ namespace SafePoint.Controllers
             return View(hospital);
         }
 
-        // GET: Hospital/Edit/5
+        // GET: Hospitals/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,7 +73,7 @@ namespace SafePoint.Controllers
             return View(hospital);
         }
 
-        // POST: Hospital/Edit/5
+        // POST: Hospitals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace SafePoint.Controllers
             return View(hospital);
         }
 
-        // GET: Hospital/Delete/5
+        // GET: Hospitals/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace SafePoint.Controllers
             return View(hospital);
         }
 
-        // POST: Hospital/Delete/5
+        // POST: Hospitals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
