@@ -5,12 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Hospital Lists</h2>
 
 <div id="map" style="height:300px"></div>
+
 <p>
-    @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-primary" })
-</p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-primary" })
+    }
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -44,9 +48,13 @@
                 @Html.DisplayFor(modelItem => item.Longitude)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.HospId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.HospId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.HospId })
+                @if (User.IsInRole("Admin")) {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.HospId })
+                    <span> | </span>
+                    @Html.ActionLink("Details", "Details", new { id = item.HospId })
+                    <span> | </span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.HospId })
+                }
             </td>
         </tr>
     }

@@ -91,6 +91,7 @@ namespace SafePoint.Controllers
         }
 
         // GET: Hospitals/Delete/5
+        // [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +109,7 @@ namespace SafePoint.Controllers
         // POST: Hospitals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        // [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Hospital hospital = db.Hospitals.Find(id);

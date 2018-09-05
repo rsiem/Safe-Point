@@ -212,6 +212,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DefaultConnection.mdf" />
+    <Content Include="App_Data\DefaultConnection_log.ldf">
+      <DependentUpon>DefaultConnection.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\FIT5032_SafePoint_DB.mdf" />
     <Content Include="App_Data\FIT5032_SafePoint_DB_log.ldf">
       <DependentUpon>FIT5032_SafePoint_DB.mdf</DependentUpon>
