@@ -47,9 +47,11 @@ namespace SafePoint.Models
         [StringLength(15)]
         public string State { get; set; }
 
+        [DisplayFormat(DataFormatString ="{0:###.########}")]
         [Column(TypeName = "numeric")]
         public decimal Latitude { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:###.#########}")]
         [Column(TypeName = "numeric")]
         public decimal Longitude { get; set; }
     }
