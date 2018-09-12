@@ -35,6 +35,9 @@
     @foreach (var item in Model)
     {
         <tr class="coordinates">
+            <td hidden class="hospID">
+                @Html.DisplayFor(modelItem => item.HospId)
+            </td>
             <td class="description">
                 @Html.DisplayFor(modelItem => item.HospName)
             </td>
@@ -55,6 +58,10 @@
                     <span> | </span>
                     @Html.ActionLink("Delete", "Delete", new { id = item.HospId })
                 }
+            </td>
+            <td>
+                Make Reservation
+                @*@Html.ActionLink("Make reservation", )*@
             </td>
         </tr>
     }

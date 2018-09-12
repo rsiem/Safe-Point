@@ -16,12 +16,14 @@ $(".coordinates").each(function () {
     var longitude = $(".longitude", this).text().trim();
     var latitude = $(".latitude", this).text().trim();
     var description = $(".description", this).text().trim();
+    var hospID = $(".hospID", this).text().trim();
 
     // Create a point data structure to hold the values.
     var point = {
         "latitude": latitude,
         "longitude": longitude,
-        "description": description
+        "description": description,
+        "hospID": hospID
     };
 
     // Push them all into an array.
@@ -35,6 +37,7 @@ for (i = 0; i < locations.length; i++) {
         "type": "Feature",
         "properties": {
             "description": locations[i].description,
+            "hospID": locations[i].hospID,
             "icon": "circle-15"
         },
         "geometry": {
@@ -86,6 +89,10 @@ map.on('load', function () {
     map.on('click', 'places', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = e.features[0].properties.description;
+        var hospID = e.features[0].properties.hospID;
+        var link = "<a href=\"";
+        var button = "<p><button name=\"submit\" type=\"submit\" value=\"" + hospID + "\">Make Reservation</button></p>";
+        
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -96,7 +103,7 @@ map.on('load', function () {
 
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(description)
+            .setHTML(description + button)
             .addTo(map);
     });
 

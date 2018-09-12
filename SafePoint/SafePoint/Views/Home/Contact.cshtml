@@ -14,33 +14,37 @@
             </div>
             <form class="contactus" action="contact-us" method="post">
                 <div class="column">
-                    <label>Title</label>
-                    <select id="title" name="title" requiered>
-                        <option value="Mr">Mr.</option>
-                        <option value="Ms">Ms.</option>
-                        <option value="Mrs">Mrs.</option>
-                    </select>
+                    <p><label>Title</label></p>
+                    <p>
+                        <select id="title" name="title" requiered>
+                            <option value="Mr">Mr.</option>
+                            <option value="Ms">Ms.</option>
+                            <option value="Mrs">Mrs.</option>
+                        </select>
+                    </p>
 
-                    <label>First Name</label>
-                    <input type="text" id="fname" placeholder="e.g. John" name="fname" required>
+                    <p><label>First Name</label></p>
+                    <p><input type="text" id="fname" placeholder="e.g. John" name="fname" required></p>
 
-                    <label>Last Name</label>
-                    <input type="text" id="lname" placeholder="e.g. Doe" name="lname" required>
+                    <p><label>Last Name</label></p>
+                    <p><input type="text" id="lname" placeholder="e.g. Doe" name="lname" required></p>
 
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="e.g. jdoe@student.unimelb.edu.au" name="email">
+                    <p><label>Email</label></p>
+                    <p><input type="email" id="email" placeholder="e.g. jdoe@student.unimelb.edu.au" name="email"></p>
 
-                    <label>Enquiry Type</label>
-                    <select id="type" name="type" requiered>
-                        <option value="other">Other</option>
-                        <option value="subject">Subject</option>
-                        <option value="profile">Profile</option>
-                        <option value="tutor">Becoming a tutor</option>
-                        <option value="general">General</option>
-                    </select>
+                    <p><label>Enquiry Type</label></p>
+                    <p>
+                        <select id="type" name="type" requiered>
+                            <option value="other">Other</option>
+                            <option value="subject">Subject</option>
+                            <option value="profile">Profile</option>
+                            <option value="tutor">Becoming a tutor</option>
+                            <option value="general">General</option>
+                        </select>
+                    </p>
 
-                    <label>Enquiry</label>
-                    <textarea id="enquiry" placeholder="" name="enquiry" style="height:150px; max-height:320px;" required></textarea>
+                    <p><label>Enquiry</label></p>
+                    <p><textarea id="enquiry" placeholder="" name="enquiry" style="height:150px; max-height:320px;" required></textarea></p>
 
                     <button type="submit" class="submitbtn submitform" value="submit" id="btn" onclick="sendAlert()">Submit</button>
                 </div>
