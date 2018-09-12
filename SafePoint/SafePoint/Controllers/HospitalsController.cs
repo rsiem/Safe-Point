@@ -10,7 +10,6 @@ using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
-    [Authorize]
     public class HospitalsController : Controller
     {
         private FIT5032_SafePoint_Models db = new FIT5032_SafePoint_Models();

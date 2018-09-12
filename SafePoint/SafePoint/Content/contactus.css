@@ -1,0 +1,56 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.column {
+    -webkit-column-count: 2;
+    /* Chrome, Safari, Opera */
+    -moz-column-count: 2;
+    /* firefox */
+    column-count: 2;
+}
+
+.contactform input[type=text], .contactform input[type=email], select, textarea {
+    width: 100%;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.submitbtn {
+    width: 50%;
+    float: left;
+    border: none;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    color: white;
+    border-radius: 4px;
+    background-color: #0C445B;
+}
+
+.submitform:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        -webkit-column-count: 1;
+        /* Chrome, Safari, Opera */
+        -moz-column-count: 1;
+        /* firefox */
+        column-count: 1;
+    }
+
+    .submitbtn {
+        position: absolute;
+        left: 140px;
+    }
+}
+
+h4 {
+    text-align: center;
+}

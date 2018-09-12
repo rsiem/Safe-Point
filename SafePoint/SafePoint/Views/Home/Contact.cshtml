@@ -1,10 +1,54 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact Us";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
+@Styles.Render("~/Content/contactus.css")
+
+<div class="container-fluid">
+    <div class="row contactform">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h4 class="title">Contact Form</h4>
+            </div>
+            <form class="contactus" action="contact-us" method="post">
+                <div class="column">
+                    <label>Title</label>
+                    <select id="title" name="title" requiered>
+                        <option value="Mr">Mr.</option>
+                        <option value="Ms">Ms.</option>
+                        <option value="Mrs">Mrs.</option>
+                    </select>
+
+                    <label>First Name</label>
+                    <input type="text" id="fname" placeholder="e.g. John" name="fname" required>
+
+                    <label>Last Name</label>
+                    <input type="text" id="lname" placeholder="e.g. Doe" name="lname" required>
+
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="e.g. jdoe@student.unimelb.edu.au" name="email">
+
+                    <label>Enquiry Type</label>
+                    <select id="type" name="type" requiered>
+                        <option value="other">Other</option>
+                        <option value="subject">Subject</option>
+                        <option value="profile">Profile</option>
+                        <option value="tutor">Becoming a tutor</option>
+                        <option value="general">General</option>
+                    </select>
+
+                    <label>Enquiry</label>
+                    <textarea id="enquiry" placeholder="" name="enquiry" style="height:150px; max-height:320px;" required></textarea>
+
+                    <button type="submit" class="submitbtn submitform" value="submit" id="btn" onclick="sendAlert()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<address>
     One Microsoft Way<br />
     Redmond, WA 98052-6399<br />
     <abbr title="Phone">P:</abbr>
@@ -14,4 +58,4 @@
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+</address>*@
