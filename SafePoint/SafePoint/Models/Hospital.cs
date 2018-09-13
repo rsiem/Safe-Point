@@ -13,16 +13,20 @@ namespace SafePoint.Models
         public int HospId { get; set; }
 
         [Required]
+        [Display(Name = "Hospital Name")]
         public string HospName { get; set; }
 
         [Required]
         [StringLength(25)]
+        [Display(Name = "Hospital Type")]
         public string HospType { get; set; }
 
         public string LGA { get; set; }
 
+        [Display(Name = "Service Name")]
         public string ServiceName { get; set; }
 
+        [Display(Name = "Phone Number")]
         public int? PhoneNum { get; set; }
 
         [Required]

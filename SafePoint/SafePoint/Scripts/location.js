@@ -90,8 +90,9 @@ map.on('load', function () {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = e.features[0].properties.description;
         var hospID = e.features[0].properties.hospID;
-        var link = "<a href=\"";
-        var button = "<p><button name=\"submit\" type=\"submit\" value=\"" + hospID + "\">Make Reservation</button></p>";
+        // TODO: configure the GET parameters, how to send it into the Controller
+        var link = "<a href=\"/Hospitals/Details/" + hospID + "\">";
+        var button = "<p><button>" + link + "Make Reservation</a></button></p>";
         
 
         // Ensure that if the map is zoomed out such that multiple
