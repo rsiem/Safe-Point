@@ -24,11 +24,23 @@ namespace SafePoint
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.min.css",
+                      "~/Content/smalot-datetimepicker/bootstrap-datetimepicker.min.css"));
 
             // Add the location.js to the bundle called mapbox
             bundles.Add(new ScriptBundle("~/bundles/mapbox").Include(
                       "~/Scripts/location.js"));
+
+            // Add the data table bundle
+            bundles.Add(new StyleBundle("~/bundles/DataTables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/dataTables.bootstrap.js"));
+
+            // Add the datetimepicker bundle
+            bundles.Add(new StyleBundle("~/bundles/datetimepicker").Include(
+                "~/Scripts/smalot-datetimepicker/bootstrap-datetimepicker.js"
+                ));
         }
     }
 }

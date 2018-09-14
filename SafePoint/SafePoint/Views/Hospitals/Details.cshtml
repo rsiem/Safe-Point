@@ -11,15 +11,13 @@
     <h4>Hospital</h4>
     <hr />
     <dl class="dl-horizontal">
-        <p>
-            <dt>
-                @Html.DisplayNameFor(model => model.HospName)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.HospName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.HospName)
-            </dd>
-        </p>
+        <dd>
+            @Html.DisplayFor(model => model.HospName)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.HospType)
@@ -54,67 +52,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StreetNum)
+            Address
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.StreetNum)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadName)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadSuffix)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadSuffix)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadType)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadType)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostalCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.State)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Longitude)
+            @Html.DisplayFor(model => model.PostalCode)
         </dd>
 
     </dl>
@@ -127,3 +79,27 @@
         @Html.ActionLink("Back to List", "Index")
     }
 </p>
+
+<div class="input-group date">
+    <input type="text" class="form-control">
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/datetimepicker")
+
+    <script type="text/javascript">
+        $(".date").datetimepicker({
+            format: "dd/mm/yyyy hh:ii",
+            autoclose: true,
+            todayBtn: true,
+            todayHighlight: true,
+            startDate: new Date(),
+            minuteStep: 30,
+            pickerPosition: "bottom-left"
+        });
+    </script>
+}
