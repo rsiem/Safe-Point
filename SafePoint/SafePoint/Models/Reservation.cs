@@ -19,5 +19,8 @@ namespace SafePoint.Models
         public string UserId { get; set; }
 
         public DateTime ResvTime { get; set; }
+
+        [Required]
+        public string Title { get; set; }
     }
 }

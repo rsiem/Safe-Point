@@ -87,9 +87,7 @@
     </div>
 </div>
 
-<p>Selected Appointment Time :</p>
 <p id="afterpick"></p>
-<p><button id="continue">Continue</button></p>
 
 
 @section Scripts {
@@ -109,7 +107,7 @@
         var startDate = new Date(year, month, date, 9, 0);
 
         $(".date").datetimepicker({
-            format: "dd/mm/yyyy hh:ii",
+            format: "dd-mm-yyyy hh:ii",
             autoclose: true,
             //todayBtn: true,
             daysOfWeekDisabled: '0',
@@ -120,14 +118,27 @@
             pickerPosition: "bottom-left"
         });
 
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         $("#datetime").on("change paste keyup", function () {
+            
+            var datetime = $("#datetime").val();
+            var datePicked = datetime.split(' ')[0];
+            var timePicked = datetime.split(' ')[1];
+            var date = datePicked.split('-')[0];
+            var month = datePicked.split('-')[1];
+            var year = datePicked.split('-')[2];
+            var hour = timePicked.split(':')[0];
+            var mins = timePicked.split(':')[1];
+            var datetimePicked = new Date(year, month - 1, date, hour, mins);
+            var day = datetimePicked.getDay();
+            var txt = "<p>Selected appointment time :</p><p>";
+            var button = "</p><p><button id=\"continue\">Continue</button></p>";
+            $("#afterpick").html(txt + dayNames[day] + ", " + date + " " + monthNames[datetimePicked.getMonth()] + " " + year + " at " + timePicked + button);
 
-            var datetime = document.getElementById("datetime").value;
-            document.getElementById("afterpick").innerHTML = datetime;
-
-            document.getElementById("continue").onclick = function () {
-                location.href = "/Reservations/Create?date=" + datetime;
-            };
+            var url = "/Reservations/Create?date=" + date + "-" + month + "-" + year + "T" + timePicked;
+            $("#continue").click(function () {
+                $(location).attr('href', url);
+            });
         });
         
     </script>
