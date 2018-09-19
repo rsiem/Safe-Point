@@ -81,25 +81,54 @@
 </p>
 
 <div class="input-group date">
-    <input type="text" class="form-control">
+    <input id="datetime" type="text" class="form-control">
     <div class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
     </div>
 </div>
+
+<p>Selected Appointment Time :</p>
+<p id="afterpick"></p>
+<p><button id="continue">Continue</button></p>
+
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/datetimepicker")
 
     <script type="text/javascript">
+        var today = new Date();
+        var date = today.getDate() + 1;
+        var month = today.getMonth();
+        var year = today.getFullYear();
+
+        var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        if (dayNames[today.getDay()] == 'Sat') {
+            date += 1;
+        }
+        var startDate = new Date(year, month, date, 9, 0);
+
         $(".date").datetimepicker({
             format: "dd/mm/yyyy hh:ii",
             autoclose: true,
-            todayBtn: true,
+            //todayBtn: true,
+            daysOfWeekDisabled: '0',
             todayHighlight: true,
-            startDate: new Date(),
+            startDate: startDate,
+            minView: 1,
             minuteStep: 30,
             pickerPosition: "bottom-left"
         });
+
+        $("#datetime").on("change paste keyup", function () {
+
+            var datetime = document.getElementById("datetime").value;
+            document.getElementById("afterpick").innerHTML = datetime;
+
+            document.getElementById("continue").onclick = function () {
+                location.href = "/Reservations/Create?date=" + datetime;
+            };
+        });
+        
     </script>
 }
