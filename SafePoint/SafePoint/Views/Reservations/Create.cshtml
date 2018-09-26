@@ -8,34 +8,75 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h4>Reservation</h4>
     <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            Hospital Name
+        </dt>
+        <dd id="hospName">
+
+        </dd>
+    </dl>
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
+    <div class="form-group" hidden>
         @Html.LabelFor(model => model.HospId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.HospId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.HospId, new { htmlAttributes = new { @class = "form-control hospId" } })
             @Html.ValidationMessageFor(model => model.HospId, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" hidden>
         @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control userId" } })
             @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ResvTime, htmlAttributes: new { @class = "control-label col-md-2" })
+    @*<div class="row form-group">
+        <label class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2">Reservation Date</label>
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <input class="form-control text-box single-line" id="date" readonly />
+        </div>
+    </div>*@
+
+    <dl class="dl-horizontal">
+        <dt>
+            Reservation Date
+        </dt>
+        <dd id="date">
+
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Reservation Time
+        </dt>
+        <dd id="time">
+
+        </dd>
+    </dl>
+    @*<div class="row form-group">
+        <label class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2">Reservation Time</label>
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <input class="form-control text-box single-line" id="time" readonly />
+        </div>
+    </div>*@
+
+    <div class="form-group" hidden>
+        @Html.LabelFor(model => model.ResvTime, htmlAttributes: new { @class = "control-label col-md-2 datetimelabel" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ResvTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.ResvTime, new { htmlAttributes = new { @class = "form-control datetime" } })
             @Html.ValidationMessageFor(model => model.ResvTime, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -57,9 +98,58 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <p></p>
+    <a id="othertime">Choose another time</a>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        var url = window.location.href;     // Returns full URL
+
+        $("#url").html(decodeURI(url));
+
+        // Check to make sure some query string variables
+        // exist and if not add some and redirect.
+        var datetime = url.split("?")[1].split("=")[1];
+        var date = url.split("?")[1].split("=")[1].split("T")[0];
+        var time = url.split("?")[1].split("=")[1].split("T")[1];
+        var hospId = url.split("?")[2].split("=")[1];
+        var hospName = url.split("?")[3].split("=")[1];
+        var userId = url.split("?")[4].split("=")[1];
+
+        $("#id").html(hospId);
+        $("#name").html(decodeURI(hospName));
+
+        var dt = date.split("-")[0];
+        var mt = date.split("-")[1];
+        var yr = date.split("-")[2];
+
+        var selected = new Date(yr, mt - 1, dt);
+        var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var day = dayNames[selected.getDay()];
+
+        $(function () {
+            $(".hospId").val(hospId);
+            $(".hospId").attr('readonly', true);
+
+            $(".userId").val(userId);
+            $(".userId").attr('readonly', true);
+
+            $("#date").html(day + ", " + dt + " " + monthNames[mt - 1] + " " + yr);
+            $("#time").html(time);
+
+            $(".datetime").val(yr + "-" + mt + "-" + dt + " " + time);
+            $(".datetime").attr('readonly', true);
+
+            $("#hospName").html(decodeURI(hospName));
+        });
+
+        var url = "/Hospitals/Details/" + hospId;
+        $("#othertime").click(function () {
+            $(location).attr('href', url);
+        });
+    </script>
 }

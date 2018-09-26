@@ -12,12 +12,15 @@ namespace SafePoint.Models
         [Key]
         public int ResvId { get; set; }
 
+        [Required]
         public int HospId { get; set; }
 
         [Required]
         [StringLength(128)]
         public string UserId { get; set; }
 
+        [Required]
+        [Display(Name = "Reservation Time")]
         public DateTime ResvTime { get; set; }
 
         [Required]

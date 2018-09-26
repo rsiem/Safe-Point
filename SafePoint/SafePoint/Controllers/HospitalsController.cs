@@ -6,13 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
     public class HospitalsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager; 
         private FIT5032_SafePoint_Models db = new FIT5032_SafePoint_Models();
+
+        public HospitalsController()
+        {
+
+        }
+
+        public HospitalsController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
 
         // GET: Hospitals
         public ActionResult Index()
@@ -32,6 +44,7 @@ namespace SafePoint.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.userid = User.Identity.GetUserId();
             return View(hospital);
         }
 

@@ -7,88 +7,108 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Hospital</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HospName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HospName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HospType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HospType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LGA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LGA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ServiceName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ServiceName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNum)
-        </dd>
-
-        <dt>
-            Address
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StreetNum)
-
-            @Html.DisplayFor(model => model.RoadName)
-
-            @Html.DisplayFor(model => model.RoadSuffix)
-
-            @Html.DisplayFor(model => model.RoadType)
-
-            @Html.DisplayFor(model => model.State)
-
-            @Html.DisplayFor(model => model.PostalCode)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @if (User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.HospId })
-        <span> | </span>
-        @Html.ActionLink("Back to List", "Index")
-    }
-</p>
-
-<div class="input-group date">
-    <input id="datetime" type="text" class="form-control">
-    <div class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
+<div class="row">
+    <div class="col-xs-12 visible-xs">
+        <p>this is only a test</p>
     </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div>
+            <h4>Hospital</h4>
+            <hr />
+            <dl class="dl-horizontal" id="hospitals">
+                <dt hidden>
+                    @Html.DisplayNameFor(model => model.HospId)
+                </dt>
+                <dd hidden class="hospid">
+                    @Html.DisplayFor(model => model.HospId)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HospName)
+                </dt>
+                <dd class="hospname">
+                    @Html.DisplayFor(model => model.HospName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HospType)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.HospType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LGA)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LGA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ServiceName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ServiceName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNum)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNum)
+                </dd>
+
+                <dt>
+                    Address
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StreetNum)
+
+                    @Html.DisplayFor(model => model.RoadName)
+
+                    @Html.DisplayFor(model => model.RoadSuffix)
+
+                    @Html.DisplayFor(model => model.RoadType)
+
+                    @Html.DisplayFor(model => model.State)
+
+                    @Html.DisplayFor(model => model.PostalCode)
+                </dd>
+
+            </dl>
+        </div>
+
+        <p>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = Model.HospId })
+                <span> | </span>
+                @Html.ActionLink("Back to List", "Index")
+            }
+        </p>
+
+        <div class="input-group date row">
+            <div>
+                <input id="datetime" type="text" class="form-control" readonly>
+            </div>
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </div>
+        </div>
+        <p></p>
+        <p id="afterpick"></p>
+    </div>
+    
+    <div class="col-lg-4 col-md-4 col-sm-4 visible-lg visible-md visible-sm">
+        <h4>Test</h4>
+        <hr />
+        <p>this will show the current reservation made</p>
+    </div>
+
+
 </div>
 
-<p id="afterpick"></p>
-
+<input hidden id="uid" value="@ViewBag.userid" />
 
 @section Scripts {
 
@@ -100,8 +120,8 @@
         var month = today.getMonth();
         var year = today.getFullYear();
 
-        var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        if (dayNames[today.getDay()] == 'Sat') {
+        var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        if (dayNames[today.getDay()] == 'Saturday') {
             date += 1;
         }
         var startDate = new Date(year, month, date, 9, 0);
@@ -120,7 +140,7 @@
 
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         $("#datetime").on("change paste keyup", function () {
-            
+
             var datetime = $("#datetime").val();
             var datePicked = datetime.split(' ')[0];
             var timePicked = datetime.split(' ')[1];
@@ -133,13 +153,21 @@
             var day = datetimePicked.getDay();
             var txt = "<p>Selected appointment time :</p><p>";
             var button = "</p><p><button id=\"continue\">Continue</button></p>";
-            $("#afterpick").html(txt + dayNames[day] + ", " + date + " " + monthNames[datetimePicked.getMonth()] + " " + year + " at " + timePicked + button);
+            $("#afterpick").html(txt + dayNames[day] + ", " + date + " " + monthNames[datetimePicked.getMonth()] + " " + year + " @@ " + timePicked + button);
 
-            var url = "/Reservations/Create?date=" + date + "-" + month + "-" + year + "T" + timePicked;
+            var id = '@ViewBag.userid';
+            var userid = $("#uid").val();
+            var hospid;
+            var hospname;
+            $("#hospitals").each(function () {
+                hospid = $(".hospid", this).text().trim();
+                hospname = $(".hospname", this).text().trim();
+            });
+            var url = "/Reservations/Create?date=" + datePicked + "T" + timePicked + "?hospid=" + hospid + "?hospname=" + hospname + "?id=" + id;
             $("#continue").click(function () {
                 $(location).attr('href', url);
             });
         });
-        
+
     </script>
 }
