@@ -6,13 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
     public class ReservationsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private ReservationModels db = new ReservationModels();
+
+        public ReservationsController()
+        {
+
+        }
+
+        public ReservationsController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
 
         // GET: Reservations
         public ActionResult Index()
@@ -38,6 +50,8 @@ namespace SafePoint.Controllers
         // GET: Reservations/Create
         public ActionResult Create()
         {
+            ViewBag.userid = User.Identity.GetUserId();
+            ViewBag.username = User.Identity.GetUserName();
             return View();
         }
 
@@ -46,7 +60,7 @@ namespace SafePoint.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ResvId,HospId,UserId,ResvTime")] Reservation reservation)
+        public ActionResult Create([Bind(Include = "ResvId,HospId,HospName,UserId,UserName,ResvTime,Title")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +92,7 @@ namespace SafePoint.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ResvId,HospId,UserId,ResvTime")] Reservation reservation)
+        public ActionResult Edit([Bind(Include = "ResvId,HospId,HospName,UserId,UserName,ResvTime,Title")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {

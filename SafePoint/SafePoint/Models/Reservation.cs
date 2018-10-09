@@ -17,7 +17,17 @@ namespace SafePoint.Models
 
         [Required]
         [StringLength(128)]
+        [Display(Name = "Hospital Name")]
+        public string HospName { get; set; }
+
+        [Required]
+        [StringLength(128)]
         public string UserId { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Reservation Time")]

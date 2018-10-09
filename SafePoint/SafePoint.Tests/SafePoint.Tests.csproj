@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Geocoder, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geocoder.0.1.0.0\lib\net45\Geocoder.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -350,25 +353,6 @@
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.si.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sk.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sl.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sq.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sr-latin.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sr.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sv.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sw.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ta.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.tg.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.th.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.tk.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.tr.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.uk.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.uz-cyrl.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.uz-latn.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />

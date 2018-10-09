@@ -62,32 +62,32 @@
                     Address
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.StreetNum)
+                    <address id="address">
+                        @Html.DisplayFor(model => model.StreetNum)
 
-                    @Html.DisplayFor(model => model.RoadName)
+                        @Html.DisplayFor(model => model.RoadName)
 
-                    @Html.DisplayFor(model => model.RoadSuffix)
+                        @Html.DisplayFor(model => model.RoadSuffix)
 
-                    @Html.DisplayFor(model => model.RoadType)
+                        @Html.DisplayFor(model => model.RoadType)
+                    </address>
 
-                    @Html.DisplayFor(model => model.State)
+                    <state id="state">
+                        @Html.DisplayFor(model => model.State)
+                    </state>
 
-                    @Html.DisplayFor(model => model.PostalCode)
+                    <postcode id="postcode">
+                        @Html.DisplayFor(model => model.PostalCode)
+                    </postcode>
                 </dd>
 
             </dl>
         </div>
 
         <p>
-            @if (User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = Model.HospId })
-                <span> | </span>
-                @Html.ActionLink("Back to List", "Index")
-            }
+            Select Date/Time:
         </p>
-
-        <div class="input-group date row">
+        <div class="input-group date col-md-5">
             <div>
                 <input id="datetime" type="text" class="form-control" readonly>
             </div>
@@ -98,76 +98,59 @@
         <p></p>
         <p id="afterpick"></p>
     </div>
-    
+
     <div class="col-lg-4 col-md-4 col-sm-4 visible-lg visible-md visible-sm">
         <h4>Test</h4>
         <hr />
         <p>this will show the current reservation made</p>
     </div>
-
-
 </div>
 
-<input hidden id="uid" value="@ViewBag.userid" />
+<p class="address"></p>
+<p class="postcode"></p>
+<p class="state"></p>
+<p id="location"></p>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.HospId })
+        <span> | </span>
+        @Html.ActionLink("Back to List", "Index")
+    }
+</p>
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/datetimepicker")
-
+    
     <script type="text/javascript">
-        var today = new Date();
-        var date = today.getDate() + 1;
-        var month = today.getMonth();
-        var year = today.getFullYear();
+        var address = "\"" + $.trim($("#address").text()) + "\"";
+        var postcode = "\"" + $.trim($("#postcode").text()) + "\"";
+        var state = "\"" + $.trim($("#state").text()) + "\"";
 
-        var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        if (dayNames[today.getDay()] == 'Saturday') {
-            date += 1;
-        }
-        var startDate = new Date(year, month, date, 9, 0);
+        $(".address").html(address);
+        $(".postcode").html(postcode);
+        $(".state").html(state);
 
-        $(".date").datetimepicker({
-            format: "dd-mm-yyyy hh:ii",
-            autoclose: true,
-            //todayBtn: true,
-            daysOfWeekDisabled: '0',
-            todayHighlight: true,
-            startDate: startDate,
-            minView: 1,
-            minuteStep: 30,
-            pickerPosition: "bottom-left"
-        });
+        var geocoder = new Geocoder.GeocodeService();
 
-        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        $("#datetime").on("change paste keyup", function () {
+        // geocode the location of the White House
+        var location = geocoder.GeocodeLocation(address + " " + state + " " + postcode);
 
-            var datetime = $("#datetime").val();
-            var datePicked = datetime.split(' ')[0];
-            var timePicked = datetime.split(' ')[1];
-            var date = datePicked.split('-')[0];
-            var month = datePicked.split('-')[1];
-            var year = datePicked.split('-')[2];
-            var hour = timePicked.split(':')[0];
-            var mins = timePicked.split(':')[1];
-            var datetimePicked = new Date(year, month - 1, date, hour, mins);
-            var day = datetimePicked.getDay();
-            var txt = "<p>Selected appointment time :</p><p>";
-            var button = "</p><p><button id=\"continue\">Continue</button></p>";
-            $("#afterpick").html(txt + dayNames[day] + ", " + date + " " + monthNames[datetimePicked.getMonth()] + " " + year + " @@ " + timePicked + button);
-
-            var id = '@ViewBag.userid';
-            var userid = $("#uid").val();
-            var hospid;
-            var hospname;
-            $("#hospitals").each(function () {
-                hospid = $(".hospid", this).text().trim();
-                hospname = $(".hospname", this).text().trim();
-            });
-            var url = "/Reservations/Create?date=" + datePicked + "T" + timePicked + "?hospid=" + hospid + "?hospname=" + hospname + "?id=" + id;
-            $("#continue").click(function () {
-                $(location).attr('href', url);
-            });
-        });
-
+        $("#location").html("Location: Latitude: " + location.Latitude.ToString() + "; Longitude: " + location.Longitude.ToString());
+        //$.ajax({
+        //    url: "https://mappify.io/api/rpc/address/geocode/",
+        //    type: 'POST',
+        //    dataType: 'json',
+        //    contentType: 'application/json',
+        //    data: { "streetAddress": address, "postCode": postcode, "state": state },
+        //    success: function (data) {
+        //        alert(JSON.stringify(data));
+        //    },
+        //    error: function () {
+        //        alert("Cannot get data");
+        //    }
+        //});
     </script>
 }
