@@ -28,82 +28,56 @@
             @Html.DisplayFor(model => model.HospType)
         </dd>
 
+        @if (Model.LGA != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.LGA)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LGA)
+            </dd>
+        }
+
+        @if (Model.ServiceName != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ServiceName)
+            </dd>
+        }
+
+        @if (Model.PhoneNum != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNum)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNum)
+            </dd>
+        }
+
         <dt>
-            @Html.DisplayNameFor(model => model.LGA)
+            Address
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LGA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ServiceName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ServiceName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StreetNum)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.StreetNum)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadName)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadSuffix)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadSuffix)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RoadType)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.RoadType)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostalCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
             @Html.DisplayFor(model => model.State)
+
+            @Html.DisplayFor(model => model.PostalCode)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Latitude)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Latitude)
         </dd>
@@ -111,7 +85,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Longitude)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Longitude)
         </dd>
@@ -122,7 +95,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" style="color:red;" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

@@ -35,7 +35,7 @@ $("#datetime").on("change paste keyup", function () {
     var datetimePicked = new Date(year, month - 1, date, hour, mins);
     var day = datetimePicked.getDay();
     var txt = "<p>Selected appointment time :</p><p>";
-    var button = "</p><p><button id=\"continue\">Continue</button></p>";
+    var button = "</p><p><button id=\"continue\" class=\"btn btn-default\">Continue</button></p>";
     $("#afterpick").html(txt + dayNames[day] + ", " + date + " " + monthNames[datetimePicked.getMonth()] + " " + year + " @ " + timePicked + button);
 
     var id = '@ViewBag.userid';

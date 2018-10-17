@@ -11,6 +11,7 @@ using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
+    //[Authorize]
     public class ReservationsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

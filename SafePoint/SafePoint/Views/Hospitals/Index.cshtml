@@ -7,14 +7,14 @@
 
 <h2>Hospital Lists</h2>
 
-<div id="map" style="height:300px"></div>   
+<div id="map" style="height:300px"></div>
 
 <p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-primary" })
     }
-    </p>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -31,46 +31,46 @@
 
             <th hidden></th>
             <th hidden></th>
-            <th ></th>
-            </tr>
+            <th></th>
+        </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model)
         {
-        <tr class="coordinates">
-            <td hidden class="hospID">
-                @Html.DisplayFor(modelItem => item.HospId)
-            </td>
-            <td class="description">
-                @Html.DisplayFor(modelItem => item.HospName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HospType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StreetNum)
-                @Html.DisplayFor(modelItem => item.RoadName)
-                @Html.DisplayFor(modelItem => item.RoadSuffix)
-                @Html.DisplayFor(modelItem => item.RoadType)
-                @Html.DisplayFor(modelItem => item.State)
-                @Html.DisplayFor(modelItem => item.PostalCode)
-            </td>
-            <td hidden class="latitude">
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td hidden class="longitude">
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.HospId })
-                    <span> | </span>
-                    @Html.ActionLink("Details", "Details", new { id = item.HospId })
-                    <span> | </span>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.HospId })
-                }
+            <tr class="coordinates">
+                <td hidden class="hospID">
+                    @Html.DisplayFor(modelItem => item.HospId)
+                </td>
+                <td class="description">
+                    @Html.DisplayFor(modelItem => item.HospName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HospType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StreetNum)
+                    @Html.DisplayFor(modelItem => item.RoadName)
+                    @Html.DisplayFor(modelItem => item.RoadSuffix)
+                    @Html.DisplayFor(modelItem => item.RoadType)
+                    @Html.DisplayFor(modelItem => item.State)
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+                <td hidden class="latitude">
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td hidden class="longitude">
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.HospId })
+                        <span> | </span>
+                        @Html.ActionLink("Details", "Details", new { id = item.HospId })
+                        <span> | </span>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.HospId }, new { @style = "color:red;" })
+                    }
                 </td>
             </tr>
         }

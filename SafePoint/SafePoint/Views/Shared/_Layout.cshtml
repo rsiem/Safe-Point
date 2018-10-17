@@ -8,8 +8,11 @@
     @Scripts.Render("~/bundles/modernizr")
 
     @* This is for the mapbox map *@
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css" rel="stylesheet" />
+    @*<script src="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css" rel="stylesheet" />*@
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 
     @* This is used for the Geocoding Mapbox API *@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js"></script>
@@ -32,8 +35,11 @@
                     @*@if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Hospital", "Index", "Hospitals")</li>
+                        <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }*@
+
                     <li>@Html.ActionLink("Hospital", "Index", "Hospitals")</li>
+                    <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

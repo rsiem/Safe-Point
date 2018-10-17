@@ -5,11 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Reservation Lists</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    </p>
 <table class="table">
     <tr>
         <th hidden>
@@ -54,9 +57,13 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ResvId }) |*@
-            @Html.ActionLink("Details", "Details", new { id=item.ResvId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ResvId })
+            @if (User.IsInRole("Admin"))
+            {
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ResvId }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.ResvId })
+                <span>|</span>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ResvId }, new { @style = "color:red;" })
+            }
         </td>
     </tr>
 }

@@ -12,34 +12,17 @@
     <h4>Reservation</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HospId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HospId)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.HospName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.HospName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.UserName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.UserName)
         </dd>
@@ -47,7 +30,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.ResvTime)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ResvTime)
         </dd>
@@ -55,7 +37,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
@@ -66,7 +47,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" style="color:red;" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

@@ -37,26 +37,35 @@
                     @Html.DisplayFor(model => model.HospType)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.LGA)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.LGA)
-                </dd>
+                @if (Model.LGA != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LGA)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LGA)
+                    </dd>
+                }
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.ServiceName)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.ServiceName)
-                </dd>
+                @if (Model.ServiceName != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ServiceName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ServiceName)
+                    </dd>
+                }
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.PhoneNum)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.PhoneNum)
-                </dd>
+                @if (Model.PhoneNum != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PhoneNum)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PhoneNum)
+                    </dd>
+                }
 
                 <dt>
                     Address
@@ -106,51 +115,20 @@
     </div>
 </div>
 
-<p class="address"></p>
-<p class="postcode"></p>
-<p class="state"></p>
-<p id="location"></p>
+<p class="latitude"></p>
+<p class="longitude"></p>
 
 <p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.HospId })
         <span> | </span>
-        @Html.ActionLink("Back to List", "Index")
     }
+    @Html.ActionLink("Back to List", "Index")
 </p>
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/datetimepicker")
-    
-    <script type="text/javascript">
-        var address = "\"" + $.trim($("#address").text()) + "\"";
-        var postcode = "\"" + $.trim($("#postcode").text()) + "\"";
-        var state = "\"" + $.trim($("#state").text()) + "\"";
 
-        $(".address").html(address);
-        $(".postcode").html(postcode);
-        $(".state").html(state);
-
-        var geocoder = new Geocoder.GeocodeService();
-
-        // geocode the location of the White House
-        var location = geocoder.GeocodeLocation(address + " " + state + " " + postcode);
-
-        $("#location").html("Location: Latitude: " + location.Latitude.ToString() + "; Longitude: " + location.Longitude.ToString());
-        //$.ajax({
-        //    url: "https://mappify.io/api/rpc/address/geocode/",
-        //    type: 'POST',
-        //    dataType: 'json',
-        //    contentType: 'application/json',
-        //    data: { "streetAddress": address, "postCode": postcode, "state": state },
-        //    success: function (data) {
-        //        alert(JSON.stringify(data));
-        //    },
-        //    error: function () {
-        //        alert("Cannot get data");
-        //    }
-        //});
-    </script>
 }

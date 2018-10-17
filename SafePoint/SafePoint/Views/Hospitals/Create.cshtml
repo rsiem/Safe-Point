@@ -8,10 +8,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Hospital</h4>
         <hr />
@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StreetNum, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StreetNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.StreetNum, new { htmlAttributes = new { @class = "form-control streetNum" } })
                 @Html.ValidationMessageFor(model => model.StreetNum, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoadName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RoadName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RoadName, new { htmlAttributes = new { @class = "form-control streetName" } })
                 @Html.ValidationMessageFor(model => model.RoadName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoadSuffix, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RoadSuffix, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RoadSuffix, new { htmlAttributes = new { @class = "form-control streetSuffix" } })
                 @Html.ValidationMessageFor(model => model.RoadSuffix, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoadType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RoadType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RoadType, new { htmlAttributes = new { @class = "form-control streetType" } })
                 @Html.ValidationMessageFor(model => model.RoadType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,7 +91,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control postCode" } })
                 @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -99,7 +99,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control state" } })
                 @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -107,7 +107,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control latitude", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -115,14 +115,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control longitude", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*<div>
+            <input type="button" value="Get Location" class="get-location btn btn-default" />
+        </div>*@
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="get-location btn btn-default" />
             </div>
         </div>
     </div>
@@ -134,4 +138,50 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        
+        $(".get-location").click(function () {
+            var num = $.trim($(".streetNum").val());
+            var name = $.trim($(".streetName").val());
+            var suffix = $.trim($(".streetSuffix").val());
+            var type = $.trim($(".streetType").val());
+            var address;
+            if (num != null && name != null && type != null) {
+                if (suffix != null) {
+                    address = num + " " + name + suffix + " " + type;
+                } else {
+                    address = num + " " + name + " " + type;
+                }
+            }
+
+            var postCode = $.trim($(".postCode").val());
+            var state = $.trim($(".state").val());
+            if (address != null && postCode != null && state != null) {
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://mappify.io/api/rpc/address/geocode/",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{\"streetAddress\":\"" + address + "\",\"postCode\":\"" + postCode + "\",\"state\":\"" + state + "\"}"
+                }
+
+                $.ajax(settings).done(function (response) {
+                    var lat = response.result.location.lat;
+                    var long = response.result.location.lon;
+                    var suburb = response.result.suburb;
+                    $(".latitude").val(lat);
+                    $(".longitude").attr('readonly', true);
+
+                    $(".longitude").val(long);
+                    $(".longitude").attr('readonly', true);
+                });
+            }
+        });
+
+    </script>
 }
