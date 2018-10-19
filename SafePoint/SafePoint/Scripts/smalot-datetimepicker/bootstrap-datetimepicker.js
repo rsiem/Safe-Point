@@ -554,6 +554,10 @@
 			this.picker.find('.datetimepicker-days thead').append(html);
 		},
 
+        disabledDateHoursTimes: function (dateHoursTimesDisabled) {
+            // test
+        },
+
 		fillMonths: function () {
 			var html = '',
 				i = 0;
@@ -585,9 +589,16 @@
 				var formatted = this.getFormattedDate();
 				this.picker.find('.datetimepicker-hours thead th:eq(1)').text(formatted);
 				//this.picker.find('.datetimepicker-minutes thead th:eq(1)').text(formatted);
-			} else {
-				this.picker.find('.datetimepicker-hours thead th:eq(1)')
-					.text(dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
+            } else {
+                var tempDateTimeYear = dayMonth + ' ' + dates[this.language].months[month] + ' ' + year;
+                var dateTimeYear = dayMonth + '-' + dates[this.language].months[month] + '-' + year;
+                this.picker.find('.datetimepicker-hours thead th:eq(1)')
+                    .text(tempDateTimeYear);
+                this.picker.find('.datetimepicker-hours').removeClass().addClass('datetimepicker-hours ' + dateTimeYear);
+
+
+
+
 				//this.picker.find('.datetimepicker-minutes thead th:eq(1)')
 				//	.text(dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
 			}
@@ -668,9 +679,9 @@
 					}
 				} else {
 					txt = i + ':00';
-                    html.push('<span class="hour' + clsName + '">' + txt + '</span>');
+                    html.push('<span class="hour' + clsName + ' ' + txt + '">' + txt + '</span>');
                     txt = i + ':30';
-                    html.push('<span class="hour' + clsName + '">' + txt + '</span>');
+                    html.push('<span class="hour' + clsName + ' ' + txt + '">' + txt + '</span>');
 				}
 			}
 			this.picker.find('.datetimepicker-hours td').html(html.join(''));

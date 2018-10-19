@@ -11,12 +11,12 @@ using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private ReservationModels db = new ReservationModels();
-
+        
         public ReservationsController()
         {
 
@@ -30,6 +30,8 @@ namespace SafePoint.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
+            ViewBag.userid = User.Identity.GetUserId();
+            ViewBag.datetime = DateTime.Now;
             return View(db.Reservations.ToList());
         }
 

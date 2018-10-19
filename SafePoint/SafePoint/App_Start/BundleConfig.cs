@@ -26,7 +26,9 @@ namespace SafePoint
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.min.css",
-                      "~/Content/smalot-datetimepicker/bootstrap-datetimepicker.min.css"));
+                      "~/Content/smalot-datetimepicker/bootstrap-datetimepicker.min.css",
+                      "~/Content/bootstrap-datetimepicker.min.css"
+            ));
 
             // Add the location.js to the bundle called mapbox
             bundles.Add(new ScriptBundle("~/bundles/mapbox").Include(
@@ -40,6 +42,10 @@ namespace SafePoint
             // Add the datetimepicker bundle
             bundles.Add(new StyleBundle("~/bundles/datetimepicker").Include(
                 "~/Scripts/smalot-datetimepicker/bootstrap-datetimepicker.js",
+                //"~/Scripts/bootstrap.min.js",
+                //"~/Scripts/jquery-3.3.1.min.js",
+                //"~/Scripts/moment.min.js",
+                //"~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/datetimepicker.js"
                 ));
         }

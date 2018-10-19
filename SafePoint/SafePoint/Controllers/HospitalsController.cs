@@ -11,11 +11,12 @@ using SafePoint.Models;
 
 namespace SafePoint.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HospitalsController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager; 
+        private readonly UserManager<ApplicationUser> _userManager;
         private FIT5032_SafePoint_Models db = new FIT5032_SafePoint_Models();
+        private ReservationModels resDB = new ReservationModels();
 
         public HospitalsController()
         {
@@ -41,11 +42,15 @@ namespace SafePoint.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hospital hospital = db.Hospitals.Find(id);
+            List<Reservation> reservationList = resDB.Reservations.ToList();
+            ViewBag.reservations = reservationList;
+
             if (hospital == null)
             {
                 return HttpNotFound();
             }
             ViewBag.userid = User.Identity.GetUserId();
+
             return View(hospital);
         }
 

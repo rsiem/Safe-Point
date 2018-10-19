@@ -18,7 +18,8 @@ $(".date").datetimepicker({
     startDate: startDate,
     minView: 1,
     minuteStep: 30,
-    pickerPosition: "bottom-left"
+    pickerPosition: "bottom-left",
+    disabledDates: ["23-11-2018 12:30"]
 });
 
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

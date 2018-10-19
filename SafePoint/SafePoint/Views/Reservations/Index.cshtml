@@ -12,60 +12,100 @@
     {
         @Html.ActionLink("Create New", "Create")
     }
-    </p>
+</p>
 <table class="table">
-    <tr>
-        <th hidden>
-            @Html.DisplayNameFor(model => model.HospId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HospName)
-        </th>
-        <th hidden>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResvTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.HospId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HospName)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResvTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>    
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td hidden>
-            @Html.DisplayFor(modelItem => item.HospId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HospName)
-        </td>
-        <td hidden>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResvTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @if (User.IsInRole("Admin"))
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if ((item.UserId == ViewBag.userid || User.IsInRole("Admin")))
             {
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.ResvId }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.ResvId })
-                <span>|</span>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ResvId }, new { @style = "color:red;" })
+                <tr class="resvRow @item.ResvTime.Year@item.ResvTime.Month@item.ResvTime.Day @item.ResvTime.Hour@item.ResvTime.Minute" time="@item.ResvTime.">
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.HospId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospName)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ResvTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.ResvId })
+                        <span>|</span>*@
+                        @Html.ActionLink("Details", "Details", new { id = item.ResvId })
+                        <span>|</span>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ResvId }, new { @style = "color:red;" })
+                    </td>
+                </tr>
             }
-        </td>
-    </tr>
-}
+        }
+    </tbody>
 
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/DataTables")
+
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "columnDefs": [{
+                    "targets": 6,
+                    "orderable": false
+                }],
+                "order": [[4, "asc"]]
+            });
+
+            today = new Date();
+
+            var resvTime = $(".resvRow").attr("time");
+            var date = resvTime.split(" ")[0];
+            var time = resvTime.split(" ")[1];
+            var day = date.split("/")[0];
+            var month = date.split("/")[1];
+            var year = date.split("/")[2];
+            var hour = time.split(":")[0];
+            var min = time.split(":")[1];
+
+            var next = new Date(year, month - 1, day, hour, min);
+            var value = next.getTime() - today.getTime();
+            if (value < 0) {
+                $("." + year + month + day + "." + hour + min).hide();
+            }
+        });
+    </script>
+}

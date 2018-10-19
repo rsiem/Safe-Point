@@ -9,10 +9,12 @@
 
 <div id="map" style="height:300px"></div>
 
+<br />
 <p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-primary" })
+        <br />
     }
 </p>
 <table class="table">
