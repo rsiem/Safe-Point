@@ -41,11 +41,7 @@ namespace SafePoint
 
             // Add the datetimepicker bundle
             bundles.Add(new StyleBundle("~/bundles/datetimepicker").Include(
-                "~/Scripts/smalot-datetimepicker/bootstrap-datetimepicker.js",
-                //"~/Scripts/bootstrap.min.js",
-                //"~/Scripts/jquery-3.3.1.min.js",
-                //"~/Scripts/moment.min.js",
-                //"~/Scripts/bootstrap-datetimepicker.js",
+                //"~/Scripts/smalot-datetimepicker/bootstrap-datetimepicker.js",
                 "~/Scripts/datetimepicker.js"
                 ));
         }

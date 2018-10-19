@@ -172,18 +172,20 @@
         today = new Date();
 
         var resvTime = $(".resvRow").attr("time");
-        var date = resvTime.split(" ")[0];
-        var time = resvTime.split(" ")[1];
-        var day = date.split("/")[0];
-        var month = date.split("/")[1];
-        var year = date.split("/")[2];
-        var hour = time.split(":")[0];
-        var min = time.split(":")[1];
+        if (resvTime != null) {
+            var date = resvTime.split(" ")[0];
+            var time = resvTime.split(" ")[1];
+            var day = date.split("/")[0];
+            var month = date.split("/")[1];
+            var year = date.split("/")[2];
+            var hour = time.split(":")[0];
+            var min = time.split(":")[1];
 
-        var next = new Date(year, month - 1, day, hour, min);
-        var value = next.getTime() - today.getTime();
-        if (value < 0) {
-            $("." + year + month + day + "." + hour + min).hide();
+            var next = new Date(year, month - 1, day, hour, min);
+            var value = next.getTime() - today.getTime();
+            if (value < 0) {
+                $("." + year + month + day + "." + hour + min).hide();
+            }
         }
     });
 </script>
